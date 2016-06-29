@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resize.js - Image resize with canvas</title>
+  <style>
+    * {padding:0;margin:0;}
+    body{font-family:monospace;padding:1em;}
+    table, p {margin:1em 0;border-collapse:collapse;}
+    table {text-align:left;width:100%;table-layout:fixed;}
+    table td, table th {border:1px solid #ddd;padding:0.5em;width:50%;}
+    img{max-width:100%;}
+    span{font-weight:normal;}
+  </style>
+</head>
+<body>
+
+<p><b>Warning:</b> please run the demo with a real server like `localhost`.</p>
+
+<table>
+  <tr>
+    <th>Before ( <span id="originSize"></span> )</th>
+    <th>After  ( <span id="size"></span> )</th>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <p>Upload one: <input type="file" accept="image/*"></p>
+    </td>
+  </tr>
+  <tr>
+    <td><img id="origin" src="lena.jpg"></td>
+    <td><img id="result"></td>
+  </tr>
+  <tr>
+    <td id="originExif"></td>
+    <td id="exif"></td>
+  </tr>
+</table>
+
+<script src="https://github.elemecdn.com/exif-js/exif-js/master/exif.js"></script>
+<script src="resize.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var origin = $('#origin');
+  var input = $('[type=file]');
+  var result = $('#result');
+  var originSize = $('#originSize');
+  var size = $('#size');
+  var originExif = $('#originExif');
+  var exif = $('#exif');
+
+  var options = {
+    file: origin,
+    maxWidth: 375,
+    maxHeight: 667,
+    callback: function(res) {
+      originSize.innerHTML = res.originSize / 1000 + 'Kb';
+      size.innerHTML = res.size / 1000 + 'Kb';
+      result.src = res.file;
+    },
+    readAsDataURL: true,              // by default, read as blob
+    keepExif: true                    // by default, keepExif (jpg only)
+  };
+
+  origin.onload = function () {
+    resize(options);
+  }
+
+  input.onchange = function() {
+    var file = input.files[0];
+    if(!file) return;
+    options.file = file;
+    resize(options);
+
+    var reader = new FileReader();
+    reader.onload = function() {
+      origin.src = reader.result;
+    };
+    reader.readAsDataURL(file)
+  };
+</script>
+
+</body>
+</html>

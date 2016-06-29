@@ -1,0 +1,29 @@
+{
+  "name": "resize.js",
+  "version": "1.0.0",
+  "description": "resize image with canvas",
+  "main": "resize.js",
+  "scripts": {
+    "test": "open index.html",
+    "build": "./node_modules/.bin/browserify src/resize.js -o resize.js",
+    "watch": "./node_modules/.bin/watchify src/resize.js -o resize.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofish/resize.js.git"
+  },
+  "keywords": [
+    "resize",
+    "image",
+    "exif"
+  ],
+  "author": "sofish <happinesz@gmail.com> (http://sofi.sh/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sofish/resize.js/issues"
+  },
+  "homepage": "https://github.com/sofish/resize.js#readme",
+  "devDependencies": {
+    "browserify": "^13.0.1"
+  }
+}
