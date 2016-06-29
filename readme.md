@@ -15,7 +15,7 @@ options = {
 resize(options);
 ```
 
-click to view [demo](http://sofish.github.io/resize.js/);
+click to view [demo](http://sofish.github.io/resize.js/).
 
 ## 2. Development
 
