@@ -87,7 +87,7 @@
     if(options.keepExif) {
       // ExifRestore will check if it is a jpeg
       dataURL = ExifRestorer.restore(originDataURL, dataURL);
-      if(!dataURL.match('data:image/jp')) dataURL = 'data:image/jpeg;base64,' + dataURL;
+      if(!dataURL.match('data:image')) dataURL = 'data:image/jpeg;base64,' + dataURL;
     }
 
     canvas = null;
